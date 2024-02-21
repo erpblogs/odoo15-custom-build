@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  odoo-mbo:
+    image: odoo-app
+    container_name: odoo-mbo
+    networks:
+      - odoo-nextjs_odoo-network
+    ports:
+      - "8069:8069"
+      - "8071:8071"
+      - "8072:8072"
+    command: /usr/bin/python3 /opt/odoo/core/odooce/odoo-bin -c /opt/odoo/config/odoo.conf
+    volumes:
+      - ./odoo-config:/opt/odoo/config
+      - ./odoo-data:/opt/odoo/.local
+      - ./extra-addons:/opt/odoo/extra-addons
+
+
+networks:
+  odoo-nextjs_odoo-network:
+    external: true
